@@ -82,31 +82,31 @@ class ForceDirected extends Component {
                       )
                     })}
                   </p>
+                  <form className="row payment-form" 
+                    onSubmit={(event) => {
+                      event.preventDefault()
+                      console.log("form submitting...")
+                      this.props.payment(this.state.nodeId, this.state.value)
+                  }}>
+                    <div className="col-sm-7 col-sm pr-sm-2">
+                      <input
+                        className="amount-input"
+                        type="number"
+                        pattern="[0-9]"
+                        step="0.000001"
+                        placeholder="Ether Amount"
+                        onChange={(e) => this.setState({ value: e.target.value}) }
+                        required />  
+                    </div>
+                    <div className="col-sm-5 col-sm-auto pl-sm-0">
+                      <button type="submit" className="btn btn-info btn-block btn-sm">支払う</button>
+                    </div>
+                  </form>
+                  { this.state.button ? 
+                    <button type="submit" className="btn btn-info btn-block btn-sm" onClick={this.addReference}>追加</button> :
+                    <button type="submit" className="btn btn-info btn-block btn-sm" disabled >追加</button>
+                  }
                 </div>
-                <form className="row payment-form" 
-                  onSubmit={(event) => {
-                    event.preventDefault()
-                    console.log("form submitting...")
-                    this.props.payment(this.state.nodeId, this.state.value)
-                }}>
-                  <div className="col-sm-7 col-sm pr-sm-2">
-                    <input
-                      className="amount-input"
-                      type="number"
-                      pattern="[0-9]"
-                      step="0.000001"
-                      placeholder="Ether Amount"
-                      onChange={(e) => this.setState({ value: e.target.value}) }
-                      required />  
-                  </div>
-                  <div className="col-sm-5 col-sm-auto pl-sm-0">
-                    <button type="submit" className="btn btn-info btn-block btn-sm">支払う</button>
-                  </div>
-                </form>
-                { this.state.button ? 
-                  <button type="submit" className="btn btn-info btn-block btn-sm" onClick={this.addReference}>追加</button> :
-                  <button type="submit" className="btn btn-info btn-block btn-sm" disabled >追加</button>
-                }
               </div>
               : 
               <></>}

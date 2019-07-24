@@ -66,6 +66,7 @@ class App extends Component {
   
   onSubmit = async ( ipfsHash, tokenName, rereferenceTokenIds, distributionRates) => {
     console.log('on Submit ...')
+    this.setState({ loading: true })
     await ipfs.files.add(ipfsHash, async (error, result) => {
       if(error) {
         console.error(error)
@@ -73,12 +74,24 @@ class App extends Component {
       }
       console.log(result[0])
       await this.state.token.methods.mint(result[0].hash, tokenName, rereferenceTokenIds, distributionRates).send({ from: this.state.account })
+      .once('receipt', (receipt) => { this.setState({ loading: false }) })
     }) 
   }
 
   payment = async ( tokenId, amount ) => {
+    this.setState({ loading: true })
     const ethAmount = this.state.web3.utils.toWei((amount).toString(), 'ether')
     await this.state.token.methods.sendEther(tokenId).send({ from: this.state.account, value: ethAmount})
+    await this.listenTransferEvents()
+    await this.setState({ loading: false })
+  }
+
+  async listenTransferEvents() {
+    const transferEvent = await this.state.token.events.TransferEther({}, {
+      fromBlock: 0,
+      toBlock: 'latest',
+    })
+    await console.log(transferEvent)
   }
 
   constructor(props) {

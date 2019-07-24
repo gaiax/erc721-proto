@@ -35,11 +35,14 @@ class AddContent extends Component {
 
   decorateData = async() => {
     await this.state.rates.push(this.state.rate)
-    for (var i = 0; i < this.props.ids.length; i++) { 
-      let rate = 'rate'+ i
-      this.state.rates.push(this.state[rate])
+    if ( this.props.ids.length > 0 ) {
+      for (var i = 0; i < this.props.ids.length; i++) { 
+        let rate = 'rate'+ i
+        this.state.rates.push(this.state[rate])
+      }
+    } else {
+      this.setState({ rates: [] })
     }
-    console.log(this.state.rates)
   }
   
   constructor(props) {

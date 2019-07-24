@@ -12,6 +12,7 @@ contract TraceableToken is ERC721, ERC721Metadata {
   mapping (uint256 => uint256[]) public referencedTokenIds;
   mapping (uint256 => mapping (uint256 => uint256)) public distributeRate;
 
+  event CreateContent(uint tokenid, string ipfsHash, string tokenName, uint256[] referencedIds, uint256[] distributeRate);
   event TransferEther(address indexed from, address indexed to, uint256 indexed amount);
 
   constructor() public ERC721Metadata("GX Token", "GX") {
@@ -24,6 +25,7 @@ contract TraceableToken is ERC721, ERC721Metadata {
     setTokenURI(tokenId, _ipfsHash);
     setTokenName(tokenId, _tokenName);
     setRereferencedTokenId(tokenId, _referencedIds, _distributeRate);
+    emit CreateContent(tokenId, _ipfsHash, _tokenName, _referencedIds, _distributeRate);
   }
 
   function setTokenURI(uint256 _tokenId, string memory _ipfsHash) internal {
