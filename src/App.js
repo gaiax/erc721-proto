@@ -7,6 +7,7 @@ import Token from './abis/TraceableToken.json'
 import ForceDirected from './FroceDirected'
 import ContentsList from './ContentsList'
 import Guideline from './Guideline.js'
+import Spinner from './Spinner.js'
 
 class App extends Component {
   componentWillMount() {
@@ -66,7 +67,10 @@ class App extends Component {
   
   onSubmit = async ( ipfsHash, tokenName, rereferenceTokenIds, distributionRates) => {
     console.log('on Submit ...')
-    this.setState({ loading: true })
+    this.setState({ 
+      loading: true,
+      tokenData: [],
+    })
     await ipfs.files.add(ipfsHash, async (error, result) => {
       if(error) {
         console.error(error)
@@ -74,7 +78,10 @@ class App extends Component {
       }
       console.log(result[0])
       await this.state.token.methods.mint(result[0].hash, tokenName, rereferenceTokenIds, distributionRates).send({ from: this.state.account })
-      .once('receipt', (receipt) => { this.setState({ loading: false }) })
+      .once('receipt', async (receipt) => { 
+        await window.location.reload()
+        await this.setState({ loading: false }) 
+      })
     }) 
   }
 
@@ -129,7 +136,7 @@ class App extends Component {
           </div>
         </nav>
         <div className="container-fluid">
-          { this.state.loading ? <h3 className="loader">loading...</h3> : 
+          { this.state.loading ? <div className="loader"><h3>loading...</h3><p>トランザクションの読み込みに時間がかかる場合があります...  <Spinner /></p></div> : 
             <>
               <Guideline />
               <ForceDirected 
