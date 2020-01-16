@@ -1,3 +1,47 @@
+# Contents Reference Mapping
+This application visualizes which content refers to which contents by using ERC721, 
+and will enable to design contents distribution system. 
+
+[日本語の概要はこちら]()
+
+## Web Demosite
+https://oss.gaiax-blockchain.com/erc721-proto/
+
+
+## Contributing
+Pull requests and stars are always welcome.
+
+```
+1. Fork it!
+// 2. Create your feature branch.
+$ git checkout -b my-new-feature.
+// 3. Commit your changes
+$ git commit -am 'Add some feature.
+// 4. Push to the branch.
+$ git push origin my-new-feature
+5. Submit a pull request 
+```
+
+For bugs and feature requests, [create an issue](https://github.com/gaiax/eth-checkin-proto/issues).
+
+## Developer's guide
+
+1. Install Ganache. (https://www.trufflesuite.com/ganache)
+2. Launch Ganache. 
+
+```
+// Install dependencies
+$ git clone 
+$ npm install
+// Deploy contracts
+$ truffle migrare --reset
+// Launch web view.
+$ npm run
+```
+
+## Documentation
+
+
 # コンテンツリファレンスマッピング
 
 ## 概要
