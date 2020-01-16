@@ -4,6 +4,9 @@
 ERC721を利用して、作成したコンテンツがどの作品を参照したのかを可視化できるようにしたアプリです.
 このアプリを使用することで、コンテンツの流通のシステムをデザインすることができます。
 
+https://oss.gaiax-blockchain.com/erc721-proto/
+(MetamaskでRopstenを選択してください)
+
 ## ローカル環境
 
 ・Ganacheをインストール（ https://www.trufflesuite.com/ganache ）</br>
