@@ -15,15 +15,27 @@ class App extends Component {
   }
   
   async loadBlockchainData() {
-    const web3 = new Web3(Web3.givenProvider || 'https://ropsten.infura.io/v3/19fda31148fc4dc89c7f353ffd25d15b')
-    //const network = await web3.eth.net.getNetworkType()
-    const networkId = await web3.eth.net.getId()
-    const accounts = await web3.eth.getAccounts()
-    const token = await web3.eth.Contract(Token.abi, Token.networks[networkId].address)
-    this.setState({ web3 })
-    this.setState({ account: accounts[0] })
-    this.setState({ token })
-    await this.loadTokenInfo()
+    try {
+      const web3 = new Web3(Web3.givenProvider || 'https://ropsten.infura.io/v3/19fda31148fc4dc89c7f353ffd25d15b')
+      //const network = await web3.eth.net.getNetworkType()
+      const networkId = await web3.eth.net.getId()
+      const accounts = await web3.eth.getAccounts()
+      const token = await web3.eth.Contract(Token.abi, Token.networks[networkId].address)
+      this.setState({ web3 })
+      this.setState({ account: accounts[0] })
+      this.setState({ token })
+      await this.loadTokenInfo()
+    } catch (error) {
+      var result = window.confirm('Metamaskをダウンドードし、ネットワークをRoptenに設定してください。ダウンロードの方法のページを開きますか？');
+    
+      if( result ) {
+        await window.open('https://oss.gaiax-blockchain.com/metamask.html');
+      }
+      else {
+        console.log('キャンセルがクリックされました');
+      }
+      console.error(error);
+    }
   }
 
   async loadTokenInfo() {
