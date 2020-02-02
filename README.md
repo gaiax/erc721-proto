@@ -55,7 +55,6 @@ $ npm run
 ・Click content's name, then move on to IPFS file. 
 
 
-
 # コンテンツリファレンスマッピング
 
 ## 概要
@@ -167,7 +166,7 @@ function getTokenName(uint256 _tokenId) view external returns(string) {
 ```
 
 ### ipfs
-登録したコンテンツはIPFS上に保存しています。 
+登録したコンテンツはIPFSに保存しています。 
 そして、IPFSのHash値をブロックチェーンに書き込んでいます。 
 
 ### Ethereum
