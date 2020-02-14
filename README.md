@@ -62,7 +62,7 @@ ERC721を利用して、作成したコンテンツがどの作品を参照し�
 このアプリを使用することで、コンテンツの流通のシステムをデザインすることができます。 
 
 ## デモサイト
-https://oss.gaiax-blockchain.com/erc721-proto/ 
+https://erc721-token-reference-mapping.firebaseapp.com
 (MetamaskでRopstenを選択してください)
 
 ## アプリの使い方
